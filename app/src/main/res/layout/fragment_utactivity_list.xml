@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="1"
+        android:rowCount="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:background="@drawable/bottomborder"
+            android:orientation="horizontal"
+            android:textAlignment="center">
+
+            <TextView
+                android:id="@+id/startDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="5"
+                android:textAlignment="viewEnd"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="2"
+                android:text=" - "
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/endDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="5"
+                android:textAlignment="viewStart"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <RelativeLayout xmlns:fab="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_column="0"
+            android:layout_gravity="fill_vertical"
+            android:layout_row="1">
+
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/utactivity_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+
+            <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/add_button"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:src="@drawable/ic_add_white"-->
+                <!--app:elevation="4dp" />-->
+
+            <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/add_copy_button"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:src="@drawable/ic_content_copy_white"-->
+                <!--android:visibility="gone"-->
+                <!--app:elevation="4dp" />-->
+
+            <!--<com.getbase.floatingactionbutton.AddFloatingActionButton-->
+                <!--android:id="@+id/normal_plus"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--fab:fab_plusIconColor="@color/half_black"-->
+                <!--fab:fab_colorNormal="@color/white"-->
+                <!--fab:fab_colorPressed="@color/white_pressed"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_marginBottom="16dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginStart="16dp"/>-->
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_copy_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                fab:fab_colorNormal="@color/colorAccent"
+                fab:fab_colorPressed="@color/colorPrimaryDark"
+                fab:fab_icon="@drawable/ic_add_copy"
+                android:visibility="gone"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/stop_time_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                fab:fab_colorNormal="@color/colorAccent"
+                fab:fab_colorPressed="@color/colorPrimaryDark"
+                fab:fab_icon="@drawable/ic_stop_time"
+                android:visibility="gone"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionsMenu
+                android:id="@+id/add_floating_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                fab:fab_addButtonColorNormal="@color/colorAccent"
+                fab:fab_addButtonColorPressed="@color/colorPrimaryDark"
+                fab:fab_addButtonPlusIconColor="@android:color/white">
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/add_new_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/colorAccent"
+                    fab:fab_colorPressed="@color/colorPrimaryDark"
+                    fab:fab_addButtonPlusIconColor="@android:color/white"
+                    fab:fab_icon="@drawable/ic_add_new"/>
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/start_time_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/colorAccent"
+                    fab:fab_colorPressed="@color/colorPrimaryDark"
+                    fab:fab_icon="@drawable/ic_start_time"/>
+
+            </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+        </RelativeLayout>
+
+    </GridLayout>
+</layout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="hr.optimit.mt2a.viewModel.UtActivityViewModel" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="8dp"
+        tools:context=".activity.UtActivityListActivity"
+        android:background="@drawable/bottomborder">
+
+        <TextView
+            android:id="@+id/title_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/list_item_padding"
+            android:text="@{viewModel.title}"
+            android:textStyle="bold"
+            tools:text="Activity Title" />
+
+        <TextView
+            android:id="@+id/date_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_text_view"
+            android:padding="@{@dimen/list_item_padding * 2}"
+            android:text="@{viewModel.dateRange}"
+            tools:text="Activity period" />
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MT2A</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Lozinka</string>
+    <string name="action_sign_in_short">Prijava</string>
+    <string name="error_invalid_email">Neispravna mail adresa</string>
+    <string name="error_incorrect_password">Neispravna lozinka</string>
+    <string name="error_field_required">Obavezno polje</string>
+    <string name="title_activity_main">Zadaci</string>
+    <string name="title_activity_activities_list">Aktivosti</string>
+    <string name="subtitle_format">%1$s aktivost</string>
+    <string name="new_activity">Nova Aktivost</string>
+    <string name="copy_activity">Kopiraj Aktivost</string>
+    <string name="save_activity">Spremi</string>
+</resources>
