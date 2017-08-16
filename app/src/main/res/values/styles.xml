@@ -9,4 +9,11 @@
         <item name="android:windowBackground">@color/background</item>
     </style>
 
+    <!--<style name="NavigationDrawerStyle" parent="@style/TextAppearance.AppCompat.Medium">-->
+        <!--<item name="android:textSize">50dp</item>-->
+        <!--&lt;!&ndash;<item name="android:textAppearance">@style/TextAppearance.AppCompat</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:textSize">20dp</item>&lt;!&ndash; text size in menu&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:listPreferredItemHeightSmall">40dp</item>&lt;!&ndash; item size in menu&ndash;&gt;&ndash;&gt;-->
+    <!--</style>-->
+
 </resources>
