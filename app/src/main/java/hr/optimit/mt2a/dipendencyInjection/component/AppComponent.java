@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import hr.optimit.mt2a.activity.LoginActivity;
+import hr.optimit.mt2a.activity.SingleFragmentActivity;
 import hr.optimit.mt2a.activity.StartingActivity;
 import hr.optimit.mt2a.dipendencyInjection.module.AppModule;
 import hr.optimit.mt2a.fragment.UtActivityFragment;
@@ -34,4 +35,6 @@ public interface AppComponent {
     void inject(DateUtil util);
 
     void inject(UtActivityFragment fragment);
+
+    void inject(SingleFragmentActivity.UserLogOutAsyncTask logOutAsyncTask);
 }

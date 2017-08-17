@@ -63,8 +63,8 @@ public class DateUtil {
     }
 
     public Pair<Date, Date> getDefaultStartAndEndDate() {
-        Date startDate = getStartDateWithDayPrecision(new Date());
-        Date endDate = getDayInPast(startDate, PropertiesHelper.getDefaultDayRange());
+        Date endDate = getStartDateWithDayPrecision(new Date());
+        Date startDate = getDayInPast(endDate, PropertiesHelper.getDefaultDayRange());
 
         return Pair.create(startDate, endDate);
     }

@@ -4,7 +4,9 @@ package hr.optimit.mt2a.activity;
  * Created by tomek on 17.08.16..
  */
 
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.NavigationView;
@@ -16,7 +18,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import javax.inject.Inject;
+
+import hr.optimit.mt2a.Mt2AApplication;
 import hr.optimit.mt2a.R;
+import hr.optimit.mt2a.oauth.OAuthUtil;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
@@ -97,11 +103,35 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.logout_item:
-                    finish();
+                    new UserLogOutAsyncTask().execute((Void[]) null);
                     break;
             }
 
             return true;
         }
     };
+
+    public class UserLogOutAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+        @Inject
+        OAuthUtil oAuthUtil;
+
+        UserLogOutAsyncTask() {
+            ((Mt2AApplication) getApplication()).getComponent().inject(this);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+            oAuthUtil.logout();
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            Intent i = new Intent(SingleFragmentActivity.this, LoginActivity.class);
+            startActivity(i);
+            finish();
+        }
+    }
 }

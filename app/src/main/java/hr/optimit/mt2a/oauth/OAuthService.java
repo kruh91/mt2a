@@ -19,4 +19,6 @@ public interface OAuthService {
     @FormUrlEncoded
     Call<OAuthTokenResponse> getAccessToken(@Field("grant_type") String grantType, @Field("refresh_token") String refreshToken);
 
+    @POST("/oauth/logout")
+    Call<Void> logout();
 }
