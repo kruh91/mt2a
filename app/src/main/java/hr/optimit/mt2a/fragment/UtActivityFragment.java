@@ -413,7 +413,10 @@ public class UtActivityFragment extends Fragment {
 
     private void saveUtActivity() {
 
-        description.setError(null);
+        descriptionTitle.setError(null);
+        projectSpinnerTitle.setError(null);
+        taskSpinnerTitle.setError(null);
+        locationSpinnerTitle.setError(null);
 
         boolean hasErrors = false;
         if(StringUtils.isBlank(description.getText().toString()))

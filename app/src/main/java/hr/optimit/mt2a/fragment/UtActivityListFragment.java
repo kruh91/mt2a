@@ -152,6 +152,12 @@ public class UtActivityListFragment extends Fragment {
         startDateText.setText(dateUtil.getFormattedDate(startDate));
         endDateText.setText(dateUtil.getFormattedDate(endDate));
 
+        if(endDate.before(startDate)) {
+            endDateText.setError("Početni datum prije završnog");
+        } else {
+            endDateText.setError(null);
+        }
+
         updateButtonsVisibility();
     }
 
