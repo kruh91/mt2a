@@ -19,34 +19,74 @@ public class OAuthTokenResponse {
     @SerializedName("refresh_token")
     private String refreshToken;
 
+    /**
+     * Gets access token.
+     *
+     * @return the access token
+     */
     public String getAccessToken() {
         return accessToken;
     }
 
+    /**
+     * Sets access token.
+     *
+     * @param accessToken the access token
+     */
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
 
+    /**
+     * Gets token type.
+     *
+     * @return the token type
+     */
     public String getTokenType() {
         return tokenType;
     }
 
+    /**
+     * Sets token type.
+     *
+     * @param tokenType the token type
+     */
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
     }
 
+    /**
+     * Gets expires in.
+     *
+     * @return the expires in
+     */
     public Long getExpiresIn() {
         return expiresIn;
     }
 
+    /**
+     * Sets expires in.
+     *
+     * @param expiresIn the expires in
+     */
     public void setExpiresIn(Long expiresIn) {
         this.expiresIn = expiresIn;
     }
 
+    /**
+     * Gets refresh token.
+     *
+     * @return the refresh token
+     */
     public String getRefreshToken() {
         return refreshToken;
     }
 
+    /**
+     * Sets refresh token.
+     *
+     * @param refreshToken the refresh token
+     */
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }

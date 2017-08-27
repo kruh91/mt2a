@@ -24,14 +24,27 @@ import hr.optimit.mt2a.Mt2AApplication;
 import hr.optimit.mt2a.R;
 import hr.optimit.mt2a.oauth.OAuthUtil;
 
+/**
+ * The type Single fragment activity.
+ */
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView navigationView;
 
+    /**
+     * Create fragment fragment.
+     *
+     * @return the fragment
+     */
     protected abstract Fragment createFragment();
 
+    /**
+     * Gets layout res id.
+     *
+     * @return the layout res id
+     */
     @LayoutRes
     protected int getLayoutResId() {
         return R.layout.activity_masterdetail;
@@ -111,11 +124,20 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * The type User log out async task.
+     */
     public class UserLogOutAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
+        /**
+         * The O auth util.
+         */
         @Inject
         OAuthUtil oAuthUtil;
 
+        /**
+         * Instantiates a new User log out async task.
+         */
         UserLogOutAsyncTask() {
             ((Mt2AApplication) getApplication()).getComponent().inject(this);
         }

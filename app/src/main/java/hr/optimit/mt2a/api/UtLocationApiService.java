@@ -13,6 +13,12 @@ import retrofit2.http.Query;
  */
 public interface UtLocationApiService {
 
+    /**
+     * Find locations call.
+     *
+     * @param partnerId the partner id
+     * @return the call
+     */
     @GET("/mt2a/api/locations")
     Call<List<UtLocation>> findLocations(@Query("partnerId") Long partnerId);
 }

@@ -168,10 +168,19 @@ public class LoginActivity extends AppCompatActivity {
 
         private final String username;
         private final String password;
+        /**
+         * The O auth util.
+         */
         @Inject
         OAuthUtil oAuthUtil;
         private String errorMessage;
 
+        /**
+         * Instantiates a new User login task.
+         *
+         * @param username the username
+         * @param password the password
+         */
         UserLoginTask(String username, String password) {
             this.username = username;
             this.password = password;

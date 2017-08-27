@@ -1,0 +1,15 @@
+hr.optimit.mt2a
+hr.optimit.mt2a.activity
+hr.optimit.mt2a.adapter
+hr.optimit.mt2a.api
+hr.optimit.mt2a.dipendencyInjection.component
+hr.optimit.mt2a.dipendencyInjection.module
+hr.optimit.mt2a.exception
+hr.optimit.mt2a.fragment
+hr.optimit.mt2a.holder
+hr.optimit.mt2a.model
+hr.optimit.mt2a.oauth
+hr.optimit.mt2a.service
+hr.optimit.mt2a.task
+hr.optimit.mt2a.util
+hr.optimit.mt2a.viewModel

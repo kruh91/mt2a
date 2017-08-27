@@ -39,22 +39,42 @@ public class AppModule {
 
     private Application app;
 
+    /**
+     * Instantiates a new App module.
+     *
+     * @param app the app
+     */
     public AppModule(Application app) {
         this.app = app;
     }
 
+    /**
+     * Provide shared preferences shared preferences.
+     *
+     * @return the shared preferences
+     */
     @Singleton
     @Provides
     SharedPreferences provideSharedPreferences() {
         return app.getSharedPreferences(Constants.SHARED_PREF_NAME, 0);
     }
 
+    /**
+     * Provide o auth util o auth util.
+     *
+     * @return the o auth util
+     */
     @Singleton
     @Provides
     OAuthUtil provideOAuthUtil() {
         return new OAuthUtil();
     }
 
+    /**
+     * Gets retrofit for o auth authentication.
+     *
+     * @return the retrofit for o auth authentication
+     */
     @Singleton
     @Provides
     @Named("oauthRetrofit")
@@ -82,6 +102,11 @@ public class AppModule {
 
     }
 
+    /**
+     * Gets retrofit for rest call.
+     *
+     * @return the retrofit for rest call
+     */
     @Singleton
     @Provides
     @Named("restRetrofit")

@@ -17,12 +17,22 @@ import retrofit2.Response;
  */
 public class UtTaskService extends UtAbstractService {
 
+    /**
+     * Instantiates a new Ut task service.
+     */
     @Inject
     public UtTaskService() {
         super();
         Mt2AApplication.getComponent().inject(this);
     }
 
+    /**
+     * Gets tasks.
+     *
+     * @param projectId the project id
+     * @return the tasks
+     * @throws Exception the exception
+     */
     public List<UtTask> getTasks(Long projectId) throws Exception {
         oAuthUtil.refreshTokenIfNeeded();
         List<UtTask> tasks = new ArrayList<>();

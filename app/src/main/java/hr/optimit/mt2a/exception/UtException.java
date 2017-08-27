@@ -5,6 +5,11 @@ package hr.optimit.mt2a.exception;
  */
 public class UtException extends Exception {
 
+    /**
+     * Instantiates a new Ut exception.
+     *
+     * @param message the message
+     */
     public UtException(String message) {
         super(message);
     }

@@ -24,6 +24,13 @@ public class UtActivityAdapter extends RecyclerView.Adapter<UtActivityHolder> {
     private Activity activity;
     private UtActivityListFragment fragment;
 
+    /**
+     * Instantiates a new Ut activity adapter.
+     *
+     * @param utActivityList the ut activity list
+     * @param activity       the activity
+     * @param fragment       the fragment
+     */
     public UtActivityAdapter(List<UtActivity> utActivityList, Activity activity, UtActivityListFragment fragment) {
         this.utActivityList = utActivityList;
         this.activity = activity;
@@ -49,6 +56,11 @@ public class UtActivityAdapter extends RecyclerView.Adapter<UtActivityHolder> {
         return utActivityList.size();
     }
 
+    /**
+     * Sets ut activity list.
+     *
+     * @param utActivityList the ut activity list
+     */
     public void setUtActivityList(List<UtActivity> utActivityList) {
         this.utActivityList.clear();
         this.utActivityList.addAll(utActivityList);

@@ -12,6 +12,11 @@ import java.util.List;
  */
 public class ComponentUtil {
 
+    /**
+     * Sets time picker interval.
+     *
+     * @param timePicker the time picker
+     */
     public static void setTimePickerInterval(TimePicker timePicker) {
         try {
             int interval = PropertiesHelper.getTimpickerMinutesInterval();

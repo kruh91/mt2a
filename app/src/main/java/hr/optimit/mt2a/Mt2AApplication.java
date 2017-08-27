@@ -13,6 +13,11 @@ public class Mt2AApplication extends Application {
 
     private static AppComponent component;
 
+    /**
+     * Gets component.
+     *
+     * @return the component
+     */
     public static AppComponent getComponent() {
         return component;
     }

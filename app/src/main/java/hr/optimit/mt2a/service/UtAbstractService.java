@@ -14,16 +14,28 @@ import retrofit2.Retrofit;
  */
 public class UtAbstractService {
 
+    /**
+     * The Shared preferences.
+     */
     @Inject
     protected SharedPreferences sharedPreferences;
 
+    /**
+     * The Rest retrofit.
+     */
     @Inject
     @Named("restRetrofit")
     protected Retrofit restRetrofit;
 
+    /**
+     * The O auth util.
+     */
     @Inject
     protected OAuthUtil oAuthUtil;
 
+    /**
+     * Instantiates a new Ut abstract service.
+     */
     @Inject
     public UtAbstractService() {
         Mt2AApplication.getComponent().inject(this);

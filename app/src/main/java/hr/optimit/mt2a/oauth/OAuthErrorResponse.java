@@ -14,18 +14,38 @@ public class OAuthErrorResponse {
     private String errorDesc;
 
 
+    /**
+     * Gets error desc.
+     *
+     * @return the error desc
+     */
     public String getErrorDesc() {
         return errorDesc;
     }
 
+    /**
+     * Sets error desc.
+     *
+     * @param errorDesc the error desc
+     */
     public void setErrorDesc(String errorDesc) {
         this.errorDesc = errorDesc;
     }
 
+    /**
+     * Gets error.
+     *
+     * @return the error
+     */
     public String getError() {
         return error;
     }
 
+    /**
+     * Sets error.
+     *
+     * @param error the error
+     */
     public void setError(String error) {
         this.error = error;
     }

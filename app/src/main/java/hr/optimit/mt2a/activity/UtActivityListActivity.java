@@ -9,6 +9,9 @@ import hr.optimit.mt2a.R;
 import hr.optimit.mt2a.fragment.UtActivityListFragment;
 import hr.optimit.mt2a.model.UtActivity;
 
+/**
+ * The type Ut activity list activity.
+ */
 public class UtActivityListActivity extends SingleFragmentActivity implements UtActivityListFragment.Callbacks {
 
     @Override

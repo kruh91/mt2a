@@ -12,6 +12,11 @@ import retrofit2.http.GET;
  */
 public interface UtProjectApiService {
 
+    /**
+     * Find projects call.
+     *
+     * @return the call
+     */
     @GET("/mt2a/api/projects")
     Call<List<UtProject>> findProjects();
 }

@@ -10,15 +10,35 @@ import retrofit2.http.POST;
  */
 public interface OAuthService {
 
+    /**
+     * Gets access token.
+     *
+     * @param grantType the grant type
+     * @param username  the username
+     * @param password  the password
+     * @return the access token
+     */
     @POST("/oauth/token")
     @FormUrlEncoded
     Call<OAuthTokenResponse> getAccessToken(@Field("grant_type") String grantType, @Field("username") String username,
                                             @Field("password") String password);
 
+    /**
+     * Gets access token.
+     *
+     * @param grantType    the grant type
+     * @param refreshToken the refresh token
+     * @return the access token
+     */
     @POST("/oauth/token")
     @FormUrlEncoded
     Call<OAuthTokenResponse> getAccessToken(@Field("grant_type") String grantType, @Field("refresh_token") String refreshToken);
 
+    /**
+     * Logout call.
+     *
+     * @return the call
+     */
     @POST("/oauth/logout")
     Call<Void> logout();
 }

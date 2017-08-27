@@ -26,22 +26,43 @@ import retrofit2.Retrofit;
  */
 public class OAuthUtil {
 
+    /**
+     * The Shared preferences.
+     */
     @Inject
     SharedPreferences sharedPreferences;
 
+    /**
+     * The Rest retrofit.
+     */
     @Inject
     @Named("restRetrofit")
     Retrofit restRetrofit;
 
+    /**
+     * The Oauth retrofit.
+     */
     @Inject
     @Named("oauthRetrofit")
     Retrofit oauthRetrofit;
 
+    /**
+     * Instantiates a new O auth util.
+     */
     @Inject
     public OAuthUtil() {
         Mt2AApplication.getComponent().inject(this);
     }
 
+    /**
+     * Authenticate.
+     *
+     * @param username the username
+     * @param password the password
+     * @throws UtException           the ut exception
+     * @throws InvalidTokenException the invalid token exception
+     * @throws IOException           the io exception
+     */
     public void authenticate(String username, String password) throws UtException, InvalidTokenException, IOException {
 
         OAuthService service = oauthRetrofit.create(OAuthService.class);
@@ -53,6 +74,13 @@ public class OAuthUtil {
 
     }
 
+    /**
+     * Refresh token if needed.
+     *
+     * @throws UtException           the ut exception
+     * @throws InvalidTokenException the invalid token exception
+     * @throws IOException           the io exception
+     */
     public void refreshTokenIfNeeded() throws UtException, InvalidTokenException, IOException {
 
         long tokenExpiresIn = (sharedPreferences.getLong(Constants.EXPIRE_DATE, 0) - System.currentTimeMillis()) / 1000;
@@ -66,6 +94,9 @@ public class OAuthUtil {
         }
     }
 
+    /**
+     * Logout.
+     */
     public void logout() {
         OAuthService service = restRetrofit.create(OAuthService.class);
             Call<Void> call = service.logout();
@@ -109,6 +140,13 @@ public class OAuthUtil {
 
     }
 
+    /**
+     * Is user logged in boolean.
+     *
+     * @return the boolean
+     * @throws IOException the io exception
+     * @throws UtException the ut exception
+     */
     public boolean isUserLoggedIn() throws IOException, UtException {
 
         boolean hasAccessToken = sharedPreferences.getString(Constants.ACCESS_TOKEN, null) == null ? false : true;

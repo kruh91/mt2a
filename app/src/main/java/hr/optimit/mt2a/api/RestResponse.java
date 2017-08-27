@@ -16,7 +16,7 @@ public class RestResponse implements Serializable {
 	private String status;
 	
 	private String message;
-	
+
 	/**
 	 * Instantiates a new rest response.
 	 */
@@ -27,14 +27,14 @@ public class RestResponse implements Serializable {
 	/**
 	 * Instantiates a new rest response.
 	 *
-	 * @param status the status
+	 * @param status  the status
 	 * @param message the message
 	 */
 	public RestResponse(String status, String message) {
 		this.status = status;
 		this.message = message;
 	}
-	
+
 	/**
 	 * Gets the message.
 	 *
@@ -43,7 +43,7 @@ public class RestResponse implements Serializable {
 	public String getMessage() {
 		return message;
 	}
-	
+
 	/**
 	 * Sets the message.
 	 *
@@ -52,7 +52,7 @@ public class RestResponse implements Serializable {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	/**
 	 * Gets the status.
 	 *
@@ -61,7 +61,7 @@ public class RestResponse implements Serializable {
 	public String getStatus() {
 		return status;
 	}
-	
+
 	/**
 	 * Sets the status.
 	 *

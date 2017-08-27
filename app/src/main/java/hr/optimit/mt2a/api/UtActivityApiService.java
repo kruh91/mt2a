@@ -16,10 +16,24 @@ import retrofit2.http.Query;
  */
 public interface UtActivityApiService {
 
+    /**
+     * Find by activity user user username and activity start date between call.
+     *
+     * @param username  the username
+     * @param startDate the start date
+     * @param endDate   the end date
+     * @return the call
+     */
     @GET("/mt2a/api/activities")
     Call<List<UtActivity>> findByActivityUserUserUsernameAndActivityStartDateBetween(@Query("username") String username,
                                                                                      @Query("startDate") String startDate, @Query("endDate") String endDate);
 
+    /**
+     * Save activity call.
+     *
+     * @param utActivity the ut activity
+     * @return the call
+     */
     @POST("/mt2a/api/activities/save")
     Call<RestResponse> saveActivity(@Body UtActivity utActivity);
 }

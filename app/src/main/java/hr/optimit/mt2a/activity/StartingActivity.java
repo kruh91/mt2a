@@ -47,11 +47,22 @@ public class StartingActivity extends Activity {
 
     }
 
+    /**
+     * The type Check user status async task.
+     */
     public class CheckUserStatusAsyncTask extends UtAbstractAsyncTask<Void, Boolean> {
 
+        /**
+         * The O auth util.
+         */
         @Inject
         OAuthUtil oAuthUtil;
 
+        /**
+         * Instantiates a new Check user status async task.
+         *
+         * @param activity the activity
+         */
         public CheckUserStatusAsyncTask(Activity activity) {
             setActivity(activity);
             ((Mt2AApplication) getApplication()).getComponent().inject(this);

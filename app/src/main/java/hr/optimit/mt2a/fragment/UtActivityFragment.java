@@ -57,6 +57,9 @@ public class UtActivityFragment extends Fragment {
 
     private static final String ARG_ACTIVITY = "utActivity";
 
+    /**
+     * The Date util.
+     */
     @Inject
     DateUtil dateUtil;
 
@@ -87,6 +90,12 @@ public class UtActivityFragment extends Fragment {
 
     }
 
+    /**
+     * New instance ut activity fragment.
+     *
+     * @param utActivity the ut activity
+     * @return the ut activity fragment
+     */
     public static UtActivityFragment newInstance(UtActivity utActivity) {
 
         Bundle args = new Bundle();
@@ -243,8 +252,16 @@ public class UtActivityFragment extends Fragment {
         }
     };
 
+    /**
+     * The type Get locations async task.
+     */
     public class GetLocationsAsyncTask extends UtAbstractAsyncTask<Long, List<UtLocation>> {
 
+        /**
+         * Instantiates a new Get locations async task.
+         *
+         * @param activity the activity
+         */
         public GetLocationsAsyncTask(Activity activity) {
             setActivity(activity);
         }
@@ -292,8 +309,16 @@ public class UtActivityFragment extends Fragment {
         }
     }
 
+    /**
+     * The type Get projects async task.
+     */
     public class GetProjectsAsyncTask extends UtAbstractAsyncTask<Void, List<UtProject>> {
 
+        /**
+         * Instantiates a new Get projects async task.
+         *
+         * @param activity the activity
+         */
         public GetProjectsAsyncTask(Activity activity) {
             setActivity(activity);
         }
@@ -331,8 +356,16 @@ public class UtActivityFragment extends Fragment {
         }
     }
 
+    /**
+     * The type Get tasks async task.
+     */
     public class GetTasksAsyncTask extends UtAbstractAsyncTask<Void, List<UtTask>> {
 
+        /**
+         * Instantiates a new Get tasks async task.
+         *
+         * @param activity the activity
+         */
         public GetTasksAsyncTask(Activity activity) {
             setActivity(activity);
         }
@@ -380,8 +413,16 @@ public class UtActivityFragment extends Fragment {
         }
     }
 
+    /**
+     * The type Save ut activity async task.
+     */
     public class SaveUtActivityAsyncTask extends UtAbstractAsyncTask<Void, RestResponse> {
 
+        /**
+         * Instantiates a new Save ut activity async task.
+         *
+         * @param activity the activity
+         */
         public SaveUtActivityAsyncTask(Activity activity) {
             setActivity(activity);
         }

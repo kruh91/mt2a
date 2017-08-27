@@ -7,6 +7,9 @@ import android.support.v7.app.AlertDialog;
 
 /**
  * Created by tomek on 12.07.17..
+ *
+ * @param <P> the type parameter
+ * @param <T> the type parameter
  */
 public abstract class UtAbstractAsyncTask<P, T> extends AsyncTask<P, Void, T> {
 
@@ -32,13 +35,28 @@ public abstract class UtAbstractAsyncTask<P, T> extends AsyncTask<P, Void, T> {
         }
     }
 
+    /**
+     * Sets activity.
+     *
+     * @param activity the activity
+     */
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
 
+    /**
+     * Sets error message.
+     *
+     * @param errorMessage the error message
+     */
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
+    /**
+     * Do on success.
+     *
+     * @param t the t
+     */
     public abstract void doOnSuccess(T t);
 }

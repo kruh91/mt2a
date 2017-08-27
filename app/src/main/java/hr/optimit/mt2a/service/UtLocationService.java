@@ -22,12 +22,22 @@ import retrofit2.Response;
  */
 public class UtLocationService extends UtAbstractService {
 
+    /**
+     * Instantiates a new Ut location service.
+     */
     @Inject
     public UtLocationService() {
         super();
         Mt2AApplication.getComponent().inject(this);
     }
 
+    /**
+     * Gets locations.
+     *
+     * @param partnerId the partner id
+     * @return the locations
+     * @throws Exception the exception
+     */
     public List<UtLocation> getLocations(Long partnerId) throws Exception {
         oAuthUtil.refreshTokenIfNeeded();
         List<UtLocation> locations = new ArrayList<>();

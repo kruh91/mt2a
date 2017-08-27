@@ -28,6 +28,14 @@ public class UtActivityHolder extends RecyclerView.ViewHolder implements View.On
     private List<UtActivity> utActivities;
     private UtActivityListFragment fragment;
 
+    /**
+     * Instantiates a new Ut activity holder.
+     *
+     * @param binding      the binding
+     * @param activity     the activity
+     * @param fragment     the fragment
+     * @param utActivities the ut activities
+     */
     public UtActivityHolder(UtActivityListBinding binding, Activity activity, UtActivityListFragment fragment, List<UtActivity> utActivities) {
 
         super(binding.getRoot());
@@ -40,6 +48,11 @@ public class UtActivityHolder extends RecyclerView.ViewHolder implements View.On
         this.fragment = fragment;
     }
 
+    /**
+     * Bind ut activity.
+     *
+     * @param utActivity the ut activity
+     */
     public void bindUtActivity(UtActivity utActivity) {
         viewModel = new UtActivityViewModel(utActivity);
         adaptView();

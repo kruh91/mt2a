@@ -28,6 +28,14 @@ public class UtActivityPagerActivity extends AppCompatActivity {
     private UtActivity mUtActivity;
     private List<UtActivity> utActivities;
 
+    /**
+     * New intent intent.
+     *
+     * @param packageContext the package context
+     * @param utActivity     the ut activity
+     * @param utActivities   the ut activities
+     * @return the intent
+     */
     public static Intent newIntent(Context packageContext, UtActivity utActivity, List<UtActivity> utActivities) {
         Intent intent = new Intent(packageContext, UtActivityPagerActivity.class);
         intent.putExtra(ARG_ACTIVITY, utActivity);

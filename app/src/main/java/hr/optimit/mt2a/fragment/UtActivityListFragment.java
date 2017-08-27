@@ -40,6 +40,9 @@ import hr.optimit.mt2a.util.DateUtil;
  */
 public class UtActivityListFragment extends Fragment {
 
+    /**
+     * The Date util.
+     */
     @Inject
     DateUtil dateUtil;
 
@@ -134,6 +137,9 @@ public class UtActivityListFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
+    /**
+     * Update ui.
+     */
     public void updateUI() {
         Pair<Date, Date> startAndEndDate = dateUtil.getStartAndEndDate();
         Date startDate = startAndEndDate.first;
@@ -193,14 +199,30 @@ public class UtActivityListFragment extends Fragment {
      * Required interface for hosting activities.
      */
     public interface Callbacks {
+        /**
+         * On ut activity clicked.
+         *
+         * @param utActivity   the ut activity
+         * @param utActivities the ut activities
+         */
         void onUtActivityClicked(UtActivity utActivity, List<UtActivity> utActivities);
     }
 
+    /**
+     * The type Get activities async task.
+     */
     public class GetActivitiesAsyncTask extends UtAbstractAsyncTask<Void, List<UtActivity>> {
 
         private Date startDate;
         private Date endDate;
 
+        /**
+         * Instantiates a new Get activities async task.
+         *
+         * @param activity  the activity
+         * @param startDate the start date
+         * @param endDate   the end date
+         */
         public GetActivitiesAsyncTask(Activity activity, Date startDate, Date endDate) {
             setActivity(activity);
             this.startDate = startDate;
@@ -233,6 +255,12 @@ public class UtActivityListFragment extends Fragment {
         }
     }
 
+    /**
+     * Change selection.
+     *
+     * @param newSelectedView       the new selected view
+     * @param newSelectedActivityId the new selected activity id
+     */
     public void changeSelection(View newSelectedView, Long newSelectedActivityId) {
 
         if (dateUtil.isTimeMeasureStarted()) {
@@ -352,14 +380,29 @@ public class UtActivityListFragment extends Fragment {
         }
     }
 
+    /**
+     * Gets selected ut activity id.
+     *
+     * @return the selected ut activity id
+     */
     public Long getSelectedUtActivityId() {
         return selectedUtActivityId;
     }
 
+    /**
+     * Sets selected ut activity id.
+     *
+     * @param selectedUtActivityId the selected ut activity id
+     */
     public void setSelectedUtActivityId(Long selectedUtActivityId) {
         this.selectedUtActivityId = selectedUtActivityId;
     }
 
+    /**
+     * Sets selected view.
+     *
+     * @param selectedView the selected view
+     */
     public void setSelectedView(View selectedView) {
         this.selectedView = selectedView;
     }

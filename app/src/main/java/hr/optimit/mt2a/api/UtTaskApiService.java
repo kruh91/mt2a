@@ -13,6 +13,12 @@ import retrofit2.http.Query;
  */
 public interface UtTaskApiService {
 
+    /**
+     * Find tasks call.
+     *
+     * @param projectId the project id
+     * @return the call
+     */
     @GET("/mt2a/api/tasks")
     Call<List<UtTask>> findTasks(@Query("projectId") Long projectId);
 }

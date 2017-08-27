@@ -21,12 +21,23 @@ import retrofit2.Response;
  */
 public class UtActivityService extends UtAbstractService {
 
+    /**
+     * Instantiates a new Ut activity service.
+     */
     @Inject
     public UtActivityService() {
         super();
         Mt2AApplication.getComponent().inject(this);
     }
 
+    /**
+     * Gets activities.
+     *
+     * @param fromDate the from date
+     * @param toDate   the to date
+     * @return the activities
+     * @throws Exception the exception
+     */
     public List<UtActivity> getActivities(Date fromDate, Date toDate) throws Exception {
         oAuthUtil.refreshTokenIfNeeded();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -43,6 +54,13 @@ public class UtActivityService extends UtAbstractService {
         return activities;
     }
 
+    /**
+     * Save activity rest response.
+     *
+     * @param activity the activity
+     * @return the rest response
+     * @throws Exception the exception
+     */
     public RestResponse saveActivity(UtActivity activity) throws Exception {
         RestResponse restResponse = null;
         oAuthUtil.refreshTokenIfNeeded();

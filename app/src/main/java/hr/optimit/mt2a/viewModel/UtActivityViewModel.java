@@ -19,19 +19,39 @@ public class UtActivityViewModel extends BaseObservable {
 
     private UtActivity utActivity;
 
+    /**
+     * Instantiates a new Ut activity view model.
+     *
+     * @param utActivity the ut activity
+     */
     public UtActivityViewModel(UtActivity utActivity) {
         this.utActivity = utActivity;
     }
 
+    /**
+     * Gets ut activity.
+     *
+     * @return the ut activity
+     */
     public UtActivity getUtActivity() {
         return utActivity;
     }
 
+    /**
+     * Gets title.
+     *
+     * @return the title
+     */
     @Bindable
     public String getTitle() {
         return this.utActivity.getUtProjectName() + ": " + this.utActivity.getUtTaskName();
     }
 
+    /**
+     * Gets date range.
+     *
+     * @return the date range
+     */
     @Bindable
     public String getDateRange() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd.MM.yyyy", new Locale("hr", "HR"));
