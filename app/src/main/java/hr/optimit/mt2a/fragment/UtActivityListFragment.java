@@ -55,11 +55,8 @@ public class UtActivityListFragment extends Fragment {
     private List<UtActivity> activities;
     private Long selectedUtActivityId = null;
     private View selectedView = null;
-    private FloatingActionsMenu addFloatingMenu;
     private FloatingActionButton addNewButton;
     private FloatingActionButton addCopyButton;
-    private FloatingActionButton startTimeButton;
-    private FloatingActionButton stopTimeButton;
 
     private Callbacks mCallbacks;
 
@@ -88,15 +85,10 @@ public class UtActivityListFragment extends Fragment {
                 .findViewById(R.id.utactivity_recycler_view);
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        addFloatingMenu = (FloatingActionsMenu) view.findViewById(R.id.add_floating_menu);
         addNewButton = (FloatingActionButton) view.findViewById(R.id.add_new_button);
         addNewButton.setOnClickListener(addNewButtonClickListener);
         addCopyButton = (FloatingActionButton) view.findViewById(R.id.add_copy_button);
         addCopyButton.setOnClickListener(addCopyButtonClickListener);
-        startTimeButton = (FloatingActionButton) view.findViewById(R.id.start_time_button);
-        startTimeButton.setOnClickListener(startTimeButtonClickListener);
-        stopTimeButton = (FloatingActionButton) view.findViewById(R.id.stop_time_button);
-        stopTimeButton.setOnClickListener(stopTimeButtonClickListener);
 
         startDateText = (TextView) view.findViewById(R.id.startDateText);
         startDateText.setOnClickListener(new View.OnClickListener() {
@@ -163,8 +155,6 @@ public class UtActivityListFragment extends Fragment {
         } else {
             endDateText.setError(null);
         }
-
-        updateButtonsVisibility();
     }
 
     private DatePickerDialog.OnDateSetListener startDatePickerListener = new DatePickerDialog.OnDateSetListener() {
@@ -286,7 +276,6 @@ public class UtActivityListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             mCallbacks.onUtActivityClicked(new UtActivity(), activities);
-            addFloatingMenu.collapse();
         }
     };
 
@@ -314,37 +303,6 @@ public class UtActivityListFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener startTimeButtonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            dateUtil.setUtActivityStartTime(new Date());
-            updateButtonsVisibility();
-            Toast.makeText(getActivity(), "Mjerenje vremena pokrenuto", Toast.LENGTH_LONG).show();
-        }
-    };
-
-    private View.OnClickListener stopTimeButtonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Date utActivityStartTime = dateUtil.getStoredUtActivityStartTime();
-            UtActivity utActivity = new UtActivity();
-            utActivity.setStartDate(utActivityStartTime);
-            mCallbacks.onUtActivityClicked(utActivity, activities);
-            dateUtil.setUtActivityStartTime(null);
-        }
-    };
-
-    private void updateButtonsVisibility() {
-        if (dateUtil.isTimeMeasureStarted()) {
-            disableAndHideFloatingMenu(addFloatingMenu);
-            enableAndShowFloatingButton(stopTimeButton);
-        } else {
-            enableAndShowFloatingMenu(addFloatingMenu);
-            disableAndHideFloatingButton(stopTimeButton);
-            disableAndHideFloatingButton(addCopyButton);
-        }
-    }
-
     private void enableAndShowFloatingButton(FloatingActionButton button) {
         button.setVisibility(View.VISIBLE);
         button.setEnabled(true);
@@ -355,27 +313,16 @@ public class UtActivityListFragment extends Fragment {
         button.setEnabled(false);
     }
 
-    private void enableAndShowFloatingMenu(FloatingActionsMenu menu) {
-        addFloatingMenu.setVisibility(View.VISIBLE);
-        addFloatingMenu.setEnabled(true);
-    }
-
-    private void disableAndHideFloatingMenu(FloatingActionsMenu menu) {
-        addFloatingMenu.setVisibility(View.GONE);
-        addFloatingMenu.collapse();
-        addFloatingMenu.setEnabled(false);
-    }
-
     private void adaptViewForSelectedItem(View view, boolean selected) {
         view.setSelected(selected);
 
         if (selected) {
             view.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.backgroundSelected, null));
-            disableAndHideFloatingMenu(addFloatingMenu);
             enableAndShowFloatingButton(addCopyButton);
+            disableAndHideFloatingButton(addNewButton);
         } else {
             view.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bottomborder, null));
-            enableAndShowFloatingMenu(addFloatingMenu);
+            enableAndShowFloatingButton(addNewButton);
             disableAndHideFloatingButton(addCopyButton);
         }
     }

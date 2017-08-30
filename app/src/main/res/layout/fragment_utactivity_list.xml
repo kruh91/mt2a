@@ -19,17 +19,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/startDateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:focusableInTouchMode="true"
                 android:textAlignment="viewEnd"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:focusableInTouchMode="true"/>
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/textView"
@@ -45,16 +45,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="viewStart"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:focusable="true"/>
+                android:textAlignment="viewStart"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
 
@@ -75,58 +75,28 @@
                 android:id="@+id/add_copy_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
+                android:visibility="gone"
                 fab:fab_colorNormal="@color/colorAccent"
                 fab:fab_colorPressed="@color/colorPrimaryDark"
-                fab:fab_icon="@drawable/ic_add_copy"
-                android:visibility="gone"/>
+                fab:fab_icon="@drawable/ic_add_copy" />
 
             <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/stop_time_button"
+                android:id="@+id/add_new_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
+                fab:fab_addButtonPlusIconColor="@android:color/white"
                 fab:fab_colorNormal="@color/colorAccent"
                 fab:fab_colorPressed="@color/colorPrimaryDark"
-                fab:fab_icon="@drawable/ic_stop_time"
-                android:visibility="gone"/>
+                fab:fab_icon="@drawable/ic_add_new" />
 
-            <com.getbase.floatingactionbutton.FloatingActionsMenu
-                android:id="@+id/add_floating_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                fab:fab_addButtonColorNormal="@color/colorAccent"
-                fab:fab_addButtonColorPressed="@color/colorPrimaryDark"
-                fab:fab_addButtonPlusIconColor="@android:color/white">
-
-                <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/add_new_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/colorAccent"
-                    fab:fab_colorPressed="@color/colorPrimaryDark"
-                    fab:fab_addButtonPlusIconColor="@android:color/white"
-                    fab:fab_icon="@drawable/ic_add_new"/>
-
-                <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/start_time_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/colorAccent"
-                    fab:fab_colorPressed="@color/colorPrimaryDark"
-                    fab:fab_icon="@drawable/ic_start_time"/>
-
-            </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
         </RelativeLayout>
 

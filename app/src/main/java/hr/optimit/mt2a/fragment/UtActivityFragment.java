@@ -2,9 +2,10 @@ package hr.optimit.mt2a.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,21 +16,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,7 +42,7 @@ import hr.optimit.mt2a.service.UtLocationService;
 import hr.optimit.mt2a.service.UtProjectService;
 import hr.optimit.mt2a.service.UtTaskService;
 import hr.optimit.mt2a.task.UtAbstractAsyncTask;
-import hr.optimit.mt2a.util.ComponentUtil;
+import hr.optimit.mt2a.timeSelect.TimeSelect;
 import hr.optimit.mt2a.util.Constants;
 import hr.optimit.mt2a.util.DateUtil;
 
@@ -64,9 +60,6 @@ public class UtActivityFragment extends Fragment {
     DateUtil dateUtil;
 
     private UtActivity utActivity;
-    private DatePicker datePicker;
-    private TimePicker startTimePicker;
-    private TimePicker endTimePicker;
     private Spinner projectSpinner;
     private Spinner taskSpinner;
     private Spinner locationSpinner;
@@ -75,12 +68,11 @@ public class UtActivityFragment extends Fragment {
     private ArrayAdapter<UtLocation> locationArrayAdapter;
     private ArrayAdapter<UtTask> taskArrayAdapter;
     private ArrayAdapter<UtProject> projectArrayAdapter;
-    private boolean isNew = false;
-    private Calendar calendar = Calendar.getInstance();
     private TextView projectSpinnerTitle;
     private TextView taskSpinnerTitle;
     private TextView locationSpinnerTitle;
     private TextView descriptionTitle;
+    private TimeSelect timeSelectFragment;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -113,7 +105,6 @@ public class UtActivityFragment extends Fragment {
         setHasOptionsMenu(true);
         ((Mt2AApplication) getActivity().getApplication()).getComponent().inject(this);
         this.utActivity = (UtActivity) getArguments().getSerializable(ARG_ACTIVITY);
-        isNew = utActivity.getId() == null;
     }
 
     @Override
@@ -121,16 +112,13 @@ public class UtActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_utactivity, container, false);
 
+
+        createTimeSelectFragment();
+
         projectSpinnerTitle = (TextView) view.findViewById(R.id.project_spinner_title);
         taskSpinnerTitle = (TextView) view.findViewById(R.id.task_spinner_title);
         locationSpinnerTitle = (TextView) view.findViewById(R.id.location_spinner_title);
         descriptionTitle = (TextView) view.findViewById(R.id.description_title);
-
-        datePicker = (DatePicker) view.findViewById(R.id.datePicker);
-        startTimePicker = (TimePicker) view.findViewById(R.id.startTimePicker);
-        startTimePicker.setIs24HourView(true);
-        endTimePicker = (TimePicker) view.findViewById(R.id.endTimePicker);
-        endTimePicker.setIs24HourView(true);
         projectSpinner = (Spinner) view.findViewById(R.id.project);
         projectArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item);
         projectSpinner.setAdapter(projectArrayAdapter);
@@ -155,22 +143,7 @@ public class UtActivityFragment extends Fragment {
         billable.setChecked(BooleanUtils.isTrue(utActivity.getBillable()));
         new GetProjectsAsyncTask(getActivity()).execute((Void[]) null);
 
-        Date startDate = utActivity.getStartDate();
-        if (startDate != null) {
-            calendar.setTime(startDate);
-            datePicker.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-            startTimePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
-            startTimePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
-        }
-
-        Date endDate = utActivity.getEndDate();
-        if (endDate != null) {
-            calendar.setTime(endDate);
-            endTimePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
-            endTimePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
-        }
-
-        if (utActivity.getBillable() == null ) {
+        if (utActivity.getBillable() == null) {
             utActivity.setBillable(false);
         }
 
@@ -208,6 +181,13 @@ public class UtActivityFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void createTimeSelectFragment() {
+        timeSelectFragment = new StartStopTimeSelect();
+        getChildFragmentManager().beginTransaction()
+                .add(R.id.time_select_fragment, timeSelectFragment.getFragment())
+                .commit();
     }
 
     private AdapterView.OnItemSelectedListener projectSpinnerItemSelectedListener = new AdapterView.OnItemSelectedListener() {
@@ -460,43 +440,45 @@ public class UtActivityFragment extends Fragment {
         locationSpinnerTitle.setError(null);
 
         boolean hasErrors = false;
-        if(StringUtils.isBlank(description.getText().toString()))
-        {
+        if (StringUtils.isBlank(description.getText().toString())) {
             descriptionTitle.setError("Obavezno polje");
             hasErrors = true;
         }
 
-        if(projectSpinner.getSelectedItemId() == 0) {
+        if (projectSpinner.getSelectedItemId() == 0) {
             projectSpinnerTitle.setError("Obavezno polje");
             hasErrors = true;
         }
 
-        if(taskSpinner.getSelectedItemId() == 0) {
+        if (taskSpinner.getSelectedItemId() == 0) {
             taskSpinnerTitle.setError("Obavezno polje");
             hasErrors = true;
         }
 
-        if(locationSpinner.getSelectedItemId() == 0) {
+        if (locationSpinner.getSelectedItemId() == 0) {
             locationSpinnerTitle.setError("Obavezno polje");
             hasErrors = true;
         }
 
-        if(hasErrors) {
+        if (hasErrors) {
             return;
         }
 
-        int year = datePicker.getYear();
-        int month = datePicker.getMonth();
-        int dayOfMonth = datePicker.getDayOfMonth();
-        calendar.set(year, month, dayOfMonth);
+        timeSelectFragment.setTime(utActivity);
+        if(utActivity.getStartDate() == null || utActivity.getEndDate() == null) {
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setTitle("Obavezna polja");
+            alertDialog.setMessage("Vremena moraju biti popunjena. Spremanje nije moguće");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
 
-        calendar.set(Calendar.HOUR_OF_DAY, startTimePicker.getCurrentHour());
-        calendar.set(Calendar.MINUTE, startTimePicker.getCurrentMinute());
-        utActivity.setStartDate(calendar.getTime());
-
-        calendar.set(Calendar.HOUR_OF_DAY, endTimePicker.getCurrentHour());
-        calendar.set(Calendar.MINUTE, endTimePicker.getCurrentMinute());
-        utActivity.setEndDate(calendar.getTime());
+            return;
+        }
 
         utActivity.setDescription(description.getText().toString());
 

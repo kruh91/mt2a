@@ -7,11 +7,13 @@ import hr.optimit.mt2a.activity.LoginActivity;
 import hr.optimit.mt2a.activity.SingleFragmentActivity;
 import hr.optimit.mt2a.activity.StartingActivity;
 import hr.optimit.mt2a.dipendencyInjection.module.AppModule;
+import hr.optimit.mt2a.fragment.StartStopTimeSelect;
 import hr.optimit.mt2a.fragment.UtActivityFragment;
 import hr.optimit.mt2a.fragment.UtActivityListFragment;
 import hr.optimit.mt2a.oauth.OAuthUtil;
 import hr.optimit.mt2a.service.UtAbstractService;
 import hr.optimit.mt2a.service.UtActivityService;
+import hr.optimit.mt2a.timeSelect.TimeSelect;
 import hr.optimit.mt2a.util.DateUtil;
 
 /**
@@ -82,4 +84,6 @@ public interface AppComponent {
      * @param logOutAsyncTask the log out async task
      */
     void inject(SingleFragmentActivity.UserLogOutAsyncTask logOutAsyncTask);
+
+    void inject(StartStopTimeSelect startStopTimeSelect);
 }
