@@ -23,10 +23,12 @@ public class UtActivityPagerActivity extends AppCompatActivity {
 
     private static final String ARG_ACTIVITY = "utActivity";
     private static final String ARG_ACTIVITIES = "utActivities";
+    private static final String TIME_SELECT_ID = "timeSelectId";
 
     private ViewPager mViewPager;
     private UtActivity mUtActivity;
     private List<UtActivity> utActivities;
+    private int timeSelectId;
 
     /**
      * New intent intent.
@@ -36,13 +38,15 @@ public class UtActivityPagerActivity extends AppCompatActivity {
      * @param utActivities   the ut activities
      * @return the intent
      */
-    public static Intent newIntent(Context packageContext, UtActivity utActivity, List<UtActivity> utActivities) {
+    public static Intent newIntent(Context packageContext, UtActivity utActivity, List<UtActivity> utActivities, int timeSelectId) {
         Intent intent = new Intent(packageContext, UtActivityPagerActivity.class);
         intent.putExtra(ARG_ACTIVITY, utActivity);
 
         UtActivity[] activityArray = new UtActivity[utActivities.size()];
         utActivities.toArray(activityArray);
         intent.putExtra(ARG_ACTIVITIES, activityArray);
+
+        intent.putExtra(TIME_SELECT_ID, timeSelectId);
         return intent;
     }
 
@@ -54,6 +58,7 @@ public class UtActivityPagerActivity extends AppCompatActivity {
         mUtActivity = (UtActivity) getIntent().getSerializableExtra(ARG_ACTIVITY);
         UtActivity[] activityArray = (UtActivity[]) getIntent().getSerializableExtra(ARG_ACTIVITIES);
         utActivities = Arrays.asList(activityArray);
+        timeSelectId = (int) getIntent().getSerializableExtra(TIME_SELECT_ID);
 
         mViewPager = (ViewPager) findViewById(R.id.activity_utactivity_pager_view_pager);
 
@@ -67,7 +72,7 @@ public class UtActivityPagerActivity extends AppCompatActivity {
                 } else {
                     utActivity = utActivities.get(position);
                 }
-                return UtActivityFragment.newInstance(utActivity);
+                return UtActivityFragment.newInstance(utActivity, timeSelectId);
             }
 
             @Override

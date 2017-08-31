@@ -12,4 +12,6 @@ public interface TimeSelect {
     void setTime(UtActivity utActivity);
 
     Fragment getFragment();
+
+    int getIcon();
 }

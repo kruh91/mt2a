@@ -14,6 +14,7 @@ import hr.optimit.mt2a.R;
 import hr.optimit.mt2a.databinding.UtActivityListBinding;
 import hr.optimit.mt2a.fragment.UtActivityListFragment;
 import hr.optimit.mt2a.model.UtActivity;
+import hr.optimit.mt2a.timeSelect.TimeSelectManager;
 import hr.optimit.mt2a.viewModel.UtActivityViewModel;
 
 
@@ -62,7 +63,7 @@ public class UtActivityHolder extends RecyclerView.ViewHolder implements View.On
 
     @Override
     public void onClick(View view) {
-        callback.onUtActivityClicked(viewModel.getUtActivity(), utActivities);
+        callback.onUtActivityClicked(viewModel.getUtActivity(), utActivities, TimeSelectManager.getInstance().getDefaultTimeSelectId());
         fragment.setSelectedUtActivityId(null);
         fragment.setSelectedView(null);
     }

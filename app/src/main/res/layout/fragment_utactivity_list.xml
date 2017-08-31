@@ -84,18 +84,19 @@
                 fab:fab_colorPressed="@color/colorPrimaryDark"
                 fab:fab_icon="@drawable/ic_add_copy" />
 
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/add_new_button"
+            <com.getbase.floatingactionbutton.FloatingActionsMenu
+                android:id="@+id/add_floating_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                fab:fab_addButtonPlusIconColor="@android:color/white"
-                fab:fab_colorNormal="@color/colorAccent"
-                fab:fab_colorPressed="@color/colorPrimaryDark"
-                fab:fab_icon="@drawable/ic_add_new" />
+                fab:fab_addButtonColorNormal="@color/colorAccent"
+                fab:fab_addButtonColorPressed="@color/colorPrimaryDark"
+                fab:fab_addButtonPlusIconColor="@android:color/white">
+
+            </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 
         </RelativeLayout>

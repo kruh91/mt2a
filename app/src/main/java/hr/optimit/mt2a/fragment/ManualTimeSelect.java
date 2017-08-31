@@ -65,4 +65,9 @@ public class ManualTimeSelect extends Fragment implements TimeSelect {
     public Fragment getFragment() {
         return this;
     }
+
+    @Override
+    public int getIcon() {
+        return R.drawable.ic_add_new;
+    }
 }

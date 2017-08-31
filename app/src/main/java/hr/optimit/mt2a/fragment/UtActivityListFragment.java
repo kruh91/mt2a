@@ -14,13 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -33,6 +33,7 @@ import hr.optimit.mt2a.adapter.UtActivityAdapter;
 import hr.optimit.mt2a.model.UtActivity;
 import hr.optimit.mt2a.service.UtActivityService;
 import hr.optimit.mt2a.task.UtAbstractAsyncTask;
+import hr.optimit.mt2a.timeSelect.TimeSelectManager;
 import hr.optimit.mt2a.util.DateUtil;
 
 /**
@@ -52,11 +53,11 @@ public class UtActivityListFragment extends Fragment {
     private Calendar endCalendar;
     private TextView startDateText;
     private TextView endDateText;
-    private List<UtActivity> activities;
+    private List<UtActivity> activities = new ArrayList<>();
     private Long selectedUtActivityId = null;
     private View selectedView = null;
-    private FloatingActionButton addNewButton;
     private FloatingActionButton addCopyButton;
+    private FloatingActionsMenu floatingActionsMenu;
 
     private Callbacks mCallbacks;
 
@@ -85,11 +86,10 @@ public class UtActivityListFragment extends Fragment {
                 .findViewById(R.id.utactivity_recycler_view);
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        addNewButton = (FloatingActionButton) view.findViewById(R.id.add_new_button);
-        addNewButton.setOnClickListener(addNewButtonClickListener);
         addCopyButton = (FloatingActionButton) view.findViewById(R.id.add_copy_button);
         addCopyButton.setOnClickListener(addCopyButtonClickListener);
-
+        floatingActionsMenu = (FloatingActionsMenu) view.findViewById(R.id.add_floating_menu);
+        createTimeSelectOptions(inflater);
         startDateText = (TextView) view.findViewById(R.id.startDateText);
         startDateText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +129,13 @@ public class UtActivityListFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
+    private void createTimeSelectOptions(LayoutInflater inflater) {
+        TimeSelectManager timeSelectManager = TimeSelectManager.getInstance();
+        timeSelectManager.setDependencies(inflater, floatingActionsMenu, this);
+        timeSelectManager.addTimeSelect(new ManualTimeSelect());
+        timeSelectManager.addTimeSelect(new StartStopTimeSelect());
+    }
+
     /**
      * Update ui.
      */
@@ -150,11 +157,13 @@ public class UtActivityListFragment extends Fragment {
         startDateText.setText(dateUtil.getFormattedDate(startDate));
         endDateText.setText(dateUtil.getFormattedDate(endDate));
 
-        if(endDate.before(startDate)) {
+        if (endDate.before(startDate)) {
             endDateText.setError("Početni datum prije završnog");
         } else {
             endDateText.setError(null);
         }
+
+        floatingActionsMenu.collapse();
     }
 
     private DatePickerDialog.OnDateSetListener startDatePickerListener = new DatePickerDialog.OnDateSetListener() {
@@ -195,7 +204,7 @@ public class UtActivityListFragment extends Fragment {
          * @param utActivity   the ut activity
          * @param utActivities the ut activities
          */
-        void onUtActivityClicked(UtActivity utActivity, List<UtActivity> utActivities);
+        void onUtActivityClicked(UtActivity utActivity, List<UtActivity> utActivities, int timeSelectId);
     }
 
     /**
@@ -272,20 +281,13 @@ public class UtActivityListFragment extends Fragment {
         }
     }
 
-    private View.OnClickListener addNewButtonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            mCallbacks.onUtActivityClicked(new UtActivity(), activities);
-        }
-    };
-
     private View.OnClickListener addCopyButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             UtActivity utActivity = new UtActivity();
             UtActivity selectedUtActivity = null;
-            for(UtActivity activity : activities) {
-                if(activity.getId().equals(selectedUtActivityId)) {
+            for (UtActivity activity : activities) {
+                if (activity.getId().equals(selectedUtActivityId)) {
                     selectedUtActivity = activity;
                     break;
                 }
@@ -297,7 +299,7 @@ public class UtActivityListFragment extends Fragment {
             utActivity.setUtTaskName(selectedUtActivity.getUtTaskName());
             utActivity.setUtLocationId(selectedUtActivity.getUtLocationId());
             utActivity.setBillable(selectedUtActivity.getBillable());
-            mCallbacks.onUtActivityClicked(utActivity, activities);
+            invokeCreateNewActivity(TimeSelectManager.getInstance().getDefaultTimeSelectId());
             selectedView = null;
             selectedUtActivityId = null;
         }
@@ -319,10 +321,13 @@ public class UtActivityListFragment extends Fragment {
         if (selected) {
             view.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.backgroundSelected, null));
             enableAndShowFloatingButton(addCopyButton);
-            disableAndHideFloatingButton(addNewButton);
+            floatingActionsMenu.setEnabled(false);
+            floatingActionsMenu.setVisibility(View.GONE);
+            floatingActionsMenu.collapse();
         } else {
             view.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.bottomborder, null));
-            enableAndShowFloatingButton(addNewButton);
+            floatingActionsMenu.setEnabled(true);
+            floatingActionsMenu.setVisibility(View.VISIBLE);
             disableAndHideFloatingButton(addCopyButton);
         }
     }
@@ -352,5 +357,10 @@ public class UtActivityListFragment extends Fragment {
      */
     public void setSelectedView(View selectedView) {
         this.selectedView = selectedView;
+    }
+
+    public void invokeCreateNewActivity(int timeSelectedId) {
+        UtActivity utActivity = new UtActivity();
+        mCallbacks.onUtActivityClicked(utActivity, Collections.singletonList(utActivity), timeSelectedId);
     }
 }

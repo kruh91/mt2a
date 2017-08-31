@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,6 +44,7 @@ import hr.optimit.mt2a.service.UtProjectService;
 import hr.optimit.mt2a.service.UtTaskService;
 import hr.optimit.mt2a.task.UtAbstractAsyncTask;
 import hr.optimit.mt2a.timeSelect.TimeSelect;
+import hr.optimit.mt2a.timeSelect.TimeSelectManager;
 import hr.optimit.mt2a.util.Constants;
 import hr.optimit.mt2a.util.DateUtil;
 
@@ -52,6 +54,7 @@ import hr.optimit.mt2a.util.DateUtil;
 public class UtActivityFragment extends Fragment {
 
     private static final String ARG_ACTIVITY = "utActivity";
+    private static final String TIME_SELECT_ID = "timeSelectId";
 
     /**
      * The Date util.
@@ -73,6 +76,7 @@ public class UtActivityFragment extends Fragment {
     private TextView locationSpinnerTitle;
     private TextView descriptionTitle;
     private TimeSelect timeSelectFragment;
+    private int timeSelectId;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -88,10 +92,11 @@ public class UtActivityFragment extends Fragment {
      * @param utActivity the ut activity
      * @return the ut activity fragment
      */
-    public static UtActivityFragment newInstance(UtActivity utActivity) {
+    public static UtActivityFragment newInstance(UtActivity utActivity, int timeSelectId) {
 
         Bundle args = new Bundle();
         args.putSerializable(ARG_ACTIVITY, utActivity);
+        args.putSerializable(TIME_SELECT_ID, timeSelectId);
 
         UtActivityFragment fragment = new UtActivityFragment();
         fragment.setArguments(args);
@@ -105,6 +110,7 @@ public class UtActivityFragment extends Fragment {
         setHasOptionsMenu(true);
         ((Mt2AApplication) getActivity().getApplication()).getComponent().inject(this);
         this.utActivity = (UtActivity) getArguments().getSerializable(ARG_ACTIVITY);
+        this.timeSelectId = (int) getArguments().getSerializable(TIME_SELECT_ID);;
     }
 
     @Override
@@ -184,8 +190,10 @@ public class UtActivityFragment extends Fragment {
     }
 
     private void createTimeSelectFragment() {
-        timeSelectFragment = new StartStopTimeSelect();
-        getChildFragmentManager().beginTransaction()
+        timeSelectFragment = TimeSelectManager.getInstance().getTimeSelect(timeSelectId);
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+
+        fragmentTransaction
                 .add(R.id.time_select_fragment, timeSelectFragment.getFragment())
                 .commit();
     }

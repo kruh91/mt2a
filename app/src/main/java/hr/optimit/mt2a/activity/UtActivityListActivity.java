@@ -25,8 +25,8 @@ public class UtActivityListActivity extends SingleFragmentActivity implements Ut
     }
 
     @Override
-    public void onUtActivityClicked(UtActivity activity, List<UtActivity> utActivities) {
-        Intent intent = UtActivityPagerActivity.newIntent(this, activity, utActivities);
+    public void onUtActivityClicked(UtActivity activity, List<UtActivity> utActivities, int timeSelectId) {
+        Intent intent = UtActivityPagerActivity.newIntent(this, activity, utActivities, timeSelectId);
         startActivity(intent);
     }
 }
